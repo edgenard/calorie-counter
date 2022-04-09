@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe AuthenticateUser do
   describe ".authenticate" do
+    let(:user) { create(:user) }
     context "when authentication parameters are correct" do
-      let(:user) { create(:user) }
       let(:authentication_params) { {email: user.email, password: user.password} }
       it "returns a successful result" do
         result = described_class.call(authentication_params)
@@ -22,6 +22,17 @@ describe AuthenticateUser do
         token = RequestToken.decode(value[:token])
 
         expect(token[:user_id]).to eq(user.id)
+      end
+    end
+
+    context "when authentication parameterss are incorrect" do
+      let(:authentication_params) { {email: user.email, password: "some-other-password"} }
+
+      it "returns a failure result with message" do
+        result = described_class.call(authentication_params)
+
+        expect(result.failure?).to eq(true)
+        expect(result.failure).to eq("Invalid Credentials")
       end
     end
   end

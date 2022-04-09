@@ -18,7 +18,7 @@ class AuthenticateUser
     if user&.authenticate(params[:password])
       Success(user: user, token: RequestToken.encode({user_id: user.id}))
     else
-      Failure()
+      Failure("Invalid Credentials")
     end
   end
 
