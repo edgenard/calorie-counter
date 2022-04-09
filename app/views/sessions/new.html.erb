@@ -1,0 +1,20 @@
+<section class= "container">
+<%= form_for(:session, url: sessions_path, id: "new_session") do |f| %>
+  <div class="field">
+  <%= f.label :email, class: "label" %>
+  <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+  <%= f.label :password, class: "label" %>
+  <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+  <%= f.submit "Login", class: "button" %>
+  </div>
+<% end %>
+</section>
+<section class= "container">
+  <p>New User? <%= link_to "Sign up now!", new_user_path %></p>
+</section>
