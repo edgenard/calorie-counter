@@ -33,5 +33,9 @@ module CalorieCounter
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.generators do |g|
+      g.fixture_replacement :factory_bot
+      g.test_framework :rspec, fixture: true
+    end
   end
 end

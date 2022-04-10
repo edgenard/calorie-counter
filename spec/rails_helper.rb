@@ -39,7 +39,6 @@ Shoulda::Matchers.configure do |config|
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -71,4 +70,9 @@ RSpec.configure do |config|
 
   # Include FactoryBot Syntax
   config.include FactoryBot::Syntax::Methods
+
+  # Load seed data
+  config.before(:suite) do
+    Rails.application.load_seed
+  end
 end
