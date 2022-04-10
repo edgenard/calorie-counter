@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.persisted?
+      user_auth = AuthenticateUser.call({email: @user.email, password: @user.password}).value!
+      session[:token] = user_auth[:token]
       redirect_to user_path(@user)
     else
       flash.now[:error] = @user.errors.full_messages.join(", ")
