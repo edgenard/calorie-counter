@@ -26,7 +26,7 @@ RSpec.feature "Logins", type: :feature do
     expect(page).to have_content "Invalid Credentials"
   end
 
-  scenario "When alrady logged in it redirects to user's page" do
+  scenario "When already logged in it redirects to user's page" do
     visit "/sessions/new"
     within("#new_session") do
       fill_in "Email", with: user.email

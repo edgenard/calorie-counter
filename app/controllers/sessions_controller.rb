@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: session_params[:email])
-    if user&.authenticate(session_params[:password])
-      redirect_to user_path(user)
+    result = AuthenticateUser.call(session_params)
+    if result.success?
+      session[:token] = result.success[:token]
+      redirect_to user_path(result.success[:user])
     else
       flash.now[:error] = "Invalid Credentials"
       render :new, status: :unprocessable_entity
@@ -27,9 +28,9 @@ class SessionsController < ApplicationController
   end
 
   def current_user
-    if session[:token]
-      result = AuthenticateRequest.new(session[:token]).execute
-      return result.value if result.success?
+    @current_user ||= if session[:token]
+      result = AuthenticateRequest.call(session[:token])
+      return result.success if result.success?
     end
     false
   end

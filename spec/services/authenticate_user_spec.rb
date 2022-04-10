@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe AuthenticateUser do
-  describe ".authenticate" do
+  describe ".call" do
     let(:user) { create(:user) }
     context "when authentication parameters are correct" do
       let(:authentication_params) { {email: user.email, password: user.password} }
