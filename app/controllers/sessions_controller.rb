@@ -19,19 +19,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session.delete(:token)
+    flash[:notice] = "Logged Out"
+    redirect_to root_path, status: :see_other
   end
 
   private
 
   def session_params
     params.require(:session).permit(:email, :password)
-  end
-
-  def current_user
-    @current_user ||= if session[:token]
-      result = AuthenticateRequest.call(session[:token])
-      return result.success if result.success?
-    end
-    false
   end
 end

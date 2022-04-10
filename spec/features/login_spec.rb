@@ -40,4 +40,22 @@ RSpec.feature "Logins", type: :feature do
     expect(page).to have_content "Your Food Entries"
     expect(page).to have_current_path(user_path(user))
   end
+
+  scenario "Logging Out" do
+    visit "/sessions/new"
+    within("#new_session") do
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+
+      click_button "Login"
+    end
+
+    expect(page).to have_content "Your Food Entries"
+    expect(page).to have_current_path(user_path(user))
+
+    click_on "Log out"
+
+    expect(page).to have_content "Logged Out"
+    expect(page).to have_current_path(root_path)
+  end
 end
