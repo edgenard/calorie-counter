@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
- include ApplicationHelper
+  include ApplicationHelper
 
+  private
 
- private
-
- def login(params)
+  def login(params)
     result = AuthenticateUser.call(params)
     if result.success?
       session[:token] = result.success[:token]
@@ -13,5 +12,5 @@ class ApplicationController < ActionController::Base
       flash.now[:error] = "Invalid Credentials"
       render :new, status: :unprocessable_entity
     end
- end
+  end
 end
