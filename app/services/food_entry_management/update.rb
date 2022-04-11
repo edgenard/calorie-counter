@@ -92,7 +92,6 @@ module FoodEntryManagement
           eaten_at: eaten_at_date.beginning_of_day..eaten_at_date.end_of_day
         ).count
 
-
         if entries_count >= meal.max_entries_per_day
           base.failure("Maximum food entries reached for #{meal.name} on #{eaten_at_date}")
         end
