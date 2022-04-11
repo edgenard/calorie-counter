@@ -45,9 +45,11 @@ module FoodEntryManagement
     end
 
     rule(:user) do
-      user = values[:user]
-      food_entry = values[:food_entry]
-      base.failure("user is not authorized") unless food_entry.user == user
+      if values[:user] && values[:food_entry]
+        user = values[:user]
+        food_entry = values[:food_entry]
+        base.failure("user is not authorized") unless food_entry.user == user
+      end
     end
 
     rule(changes: :meal) do
