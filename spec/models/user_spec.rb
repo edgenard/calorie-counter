@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password) }
     it { should have_secure_password }
     it { should have_many(:meals).dependent(:destroy) }
+    it { should have_many(:food_entries).dependent(:destroy) }
     it { should have_one(:setting).dependent(:destroy) }
   end
 end

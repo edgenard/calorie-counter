@@ -3,5 +3,6 @@ class User < ApplicationRecord
   validates_presence_of :email, :password
   validates_uniqueness_of :email
   has_many :meals, dependent: :destroy
+  has_many :food_entries, dependent: :destroy
   has_one :setting, dependent: :destroy
 end
