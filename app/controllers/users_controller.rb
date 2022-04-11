@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   def create
     result = CreateUser.call(user_params)
     if result.success?
-      @user = result.success
-      login({email: @user.email, password: @user.password})
+      user = result.success
+      login({email: user.email, password: user.password})
     else
       @user = result.failure[:user]
       flash.now[:error] = result.failure[:message]
