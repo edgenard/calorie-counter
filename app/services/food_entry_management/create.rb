@@ -40,15 +40,15 @@ module FoodEntryManagement
     end
 
     rule(:meal) do
-      eaten_at_date = values[:eaten_at].to_date
-      entries_count = FoodEntry.where(
-        meal: value,
-        user: values[:user],
-        eaten_at: eaten_at_date.beginning_of_day..eaten_at_date.end_of_day
-      ).count
+      if key? && values[:user]
+        eaten_at_date = values[:eaten_at].to_date
+        user = values[:user]
+        meal = value
+        entries_count = user.food_entries.meal_entries_for_day(meal, eaten_at_date).count
 
-      if entries_count >= value.max_entries_per_day
-        base.failure("Maximum food entries reached for #{value.name} on #{eaten_at_date}")
+        if entries_count >= value.max_entries_per_day
+          base.failure("Maximum food entries reached for #{meal.name} on #{eaten_at_date}")
+        end
       end
     end
   end

@@ -51,14 +51,11 @@ module FoodEntryManagement
     end
 
     rule(changes: :meal) do
-      if key?
+      if key? && values[:food_entry] && values[:user]
         eaten_at_date = values[:food_entry].eaten_at.to_date
         meal = value
-        entries_count = FoodEntry.where(
-          meal: meal,
-          user: values[:user],
-          eaten_at: eaten_at_date.beginning_of_day..eaten_at_date.end_of_day
-        ).count
+        user = values[:user]
+        entries_count = user.food_entries.meal_entries_for_day(meal, eaten_at_date).count
 
         if entries_count >= value.max_entries_per_day
           base.failure("Maximum food entries reached for #{meal.name} on #{eaten_at_date}")
@@ -67,14 +64,11 @@ module FoodEntryManagement
     end
 
     rule(changes: :eaten_at) do
-      if key?
+      if key? && values[:food_entry] && values[:user]
         eaten_at_date = value.to_date
         meal = values[:food_entry].meal
-        entries_count = FoodEntry.where(
-          meal: meal,
-          user: values[:user],
-          eaten_at: eaten_at_date.beginning_of_day..eaten_at_date.end_of_day
-        ).count
+        user = values[:user]
+        entries_count = user.food_entries.meal_entries_for_day(meal, eaten_at_date).count
 
         if entries_count >= meal.max_entries_per_day
           base.failure("Maximum food entries reached for #{meal.name} on #{eaten_at_date}")
@@ -83,14 +77,11 @@ module FoodEntryManagement
     end
 
     rule(changes: [:eaten_at, :meal]) do
-      if value.compact.count == 2
+      if value.compact.count == 2 && values[:food_entry] && values[:user]
         eaten_at_date = value[0].to_date
         meal = value[1]
-        entries_count = FoodEntry.where(
-          meal: meal,
-          user: values[:user],
-          eaten_at: eaten_at_date.beginning_of_day..eaten_at_date.end_of_day
-        ).count
+        user = values[:user]
+        entries_count = user.food_entries.meal_entries_for_day(meal, eaten_at_date).count
 
         if entries_count >= meal.max_entries_per_day
           base.failure("Maximum food entries reached for #{meal.name} on #{eaten_at_date}")
