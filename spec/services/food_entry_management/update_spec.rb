@@ -121,6 +121,32 @@ RSpec.describe FoodEntryManagement::Update do
       end
     end
 
-    context "when updating eaten_at and meal but max entries exceeded for that meal for that day"
+    context "when updating eaten_at and meal but max entries exceeded for that meal for that day" do
+      let(:meal) { create(:meal, max_entries_per_day: 1, name: "Other Meal") }
+      let(:food_entry) { create(:food_entry, user: user) }
+      let(:params) do
+        {
+          user: user,
+          food_entry: food_entry,
+          changes: {
+            eaten_at: "2022-04-09 21:37:38",
+            meal: meal
+          }
+        }
+      end
+
+      before do
+        # Creating previous FoodEntry that reached max entries for that day
+        create(:food_entry, user: user, eaten_at: "2022-04-09 00:37:00", meal: meal)
+      end
+
+      it "returns a failure result with error message" do
+        result = described_class.call(params)
+
+        expect(result.failure).to eq(
+          "Maximum food entries reached for #{meal.name} on #{params[:changes][:eaten_at].to_date}"
+        )
+      end
+    end
   end
 end
