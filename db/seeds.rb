@@ -5,7 +5,3 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
-[{name: "Dinner"}, {name: "Lunch"}, {name: "Breakfast"}].each do |meal|
-  Meal.find_or_create_by(meal)
-end

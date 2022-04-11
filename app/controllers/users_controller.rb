@@ -4,11 +4,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    if @user.persisted?
+    result = CreateUser.call(user_params)
+    if result.success?
+      @user = result.success
       login({email: @user.email, password: @user.password})
     else
-      flash.now[:error] = @user.errors.full_messages.join(", ")
+      @user = result.failure[:user]
+      flash.now[:error] = result.failure[:message]
       render action: "new", status: :unprocessable_entity
     end
   end

@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :meal_setting do
-    meal { association(:meal) }
+  factory :meal do
     user { association(:user) }
+    name { "Dinner" }
     max_entries_per_day { 5 }
   end
 end

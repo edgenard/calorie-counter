@@ -10,24 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_10_222001) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_10_225736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "meal_settings", force: :cascade do |t|
-    t.bigint "meal_id", null: false
+  create_table "meals", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "name"
     t.integer "max_entries_per_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["meal_id"], name: "index_meal_settings_on_meal_id"
-    t.index ["user_id"], name: "index_meal_settings_on_user_id"
+    t.index ["user_id"], name: "index_meals_on_user_id"
   end
 
-  create_table "meals", force: :cascade do |t|
-    t.string "name"
+  create_table "settings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "max_calories_per_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,6 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_222001) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "meal_settings", "meals"
-  add_foreign_key "meal_settings", "users"
+  add_foreign_key "meals", "users"
+  add_foreign_key "settings", "users"
 end

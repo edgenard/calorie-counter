@@ -1,4 +1,4 @@
-# Defines a new sequence
+# Defines FactoryBot sequences
 FactoryBot.define do
   sequence :email do |n|
     "person#{SecureRandom.hex(n)}@example.com"
