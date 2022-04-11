@@ -44,7 +44,7 @@ module FoodEntryManagement
       entries_count = FoodEntry.where(
         meal: value,
         user: values[:user],
-        eaten_at: eaten_at_date
+        eaten_at: eaten_at_date.beginning_of_day..eaten_at_date.end_of_day
       ).count
 
       if entries_count >= value.max_entries_per_day
