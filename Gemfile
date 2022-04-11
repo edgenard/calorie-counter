@@ -46,6 +46,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "dry-monads"
+gem "dry-validation"
 gem "jwt"
 
 group :development, :test do
