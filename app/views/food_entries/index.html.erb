@@ -1,10 +1,17 @@
 <div class="container">
+<h1 class="title has-text-centered"> Food Entries </h1>
+  <h2 class="subtitle has-text-left"> <%= link_to "Add New Food Entry", new_user_food_entry_path(current_user)%></h2>
   <% @food_entries.each do |food_entry| %>
     <section class= "section">
       <p>Name: <%= food_entry.name %></p>
       <p>Calories: <%= food_entry.calories %> </p>
       <p>Eaten at: <%= food_entry.eaten_at.to_s(:long) %></p>
       <p>Meal: <%= food_entry.meal.name %></p>
+      <p><%= link_to "Edit", edit_user_food_entry_path(current_user, food_entry) %></p>
+      <p><%= link_to "Destroy",
+        user_food_entry_path(current_user, food_entry),
+        data: {turbo_method: :delete, turbo_confirm: "This is cannot be undone. Are you sure?"}
+      %></p>
     </section>
 
   <% end %>

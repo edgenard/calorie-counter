@@ -1,6 +1,6 @@
-<h1>Edit Food Entry</h1>
 
 <section class="container">
+  <h1>Edit Food Entry</h1>
 <%= form_with(model: @food_entry, url: user_food_entry_path, id: "food_entry_form") do |f| %>
   <div class="field">
   <%= f.label :name, class: "label" %>
@@ -23,7 +23,7 @@
   </div>
 
   <div class="field">
-  <%= f.submit "Create Food Entry", class: "button" %>
+  <%= f.submit "Edit Food Entry", class: "button" %>
   </div>
 <% end %>
 </section>

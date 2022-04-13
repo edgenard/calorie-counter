@@ -15,6 +15,8 @@ class FoodEntriesController < ApplicationController
     if result.success?
       redirect_to user_food_entries_path(current_user)
     else
+      @food_entry = FoodEntry.new
+      @meals = user_meals.map { |meal| [meal.name, meal.id] }
       flash.now[:error] = result.failure
       render :new, status: :unprocessable_entity
     end
@@ -30,6 +32,8 @@ class FoodEntriesController < ApplicationController
     if result.success?
       redirect_to user_food_entries_path(current_user)
     else
+      @food_entry = FoodEntry.find(params[:id])
+      @meals = user_meals.map { |meal| [meal.name, meal.id] }
       flash.now[:error] = result.failure
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +44,7 @@ class FoodEntriesController < ApplicationController
     if result.success?
       redirect_to user_food_entries_path(current_user)
     else
-      flash.now[:error] = result.failue
+      flash.now[:error] = result.failure
       render :index, status: :unprocessable_entity
     end
   end

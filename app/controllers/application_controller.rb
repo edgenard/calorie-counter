@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     result = AuthenticateUser.call(params)
     if result.success?
       session[:token] = result.success[:token]
-      redirect_to user_path(result.success[:user])
+      redirect_to user_food_entries_path(result.success[:user])
     else
       flash.now[:error] = "Invalid Credentials"
       render :new, status: :unprocessable_entity
