@@ -1,6 +1,8 @@
 module FoodEntryManagement
   class Delete
     include Dry::Monads[:result, :do]
+
+    # params { user: User, food_entry: FoodEntry }
     def self.call(params)
       new(params).call
     end

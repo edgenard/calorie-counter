@@ -1,0 +1,29 @@
+<h1>Edit Food Entry</h1>
+
+<section class="container">
+<%= form_with(model: @food_entry, url: user_food_entry_path, id: "food_entry_form") do |f| %>
+  <div class="field">
+  <%= f.label :name, class: "label" %>
+  <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+  <%= f.label :calories, class: "label" %>
+  <%= f.number_field :calories %>
+  </div>
+
+  <div class="field">
+  <%= f.label :eaten_at, "Eaten At", class: "label" %>
+  <%= f.datetime_local_field :eaten_at %>
+  </div>
+
+  <div class="field">
+  <%= f.label :meal, "Meal", class: "label" %>
+  <%= f.select :meal, @meals %>
+  </div>
+
+  <div class="field">
+  <%= f.submit "Create Food Entry", class: "button" %>
+  </div>
+<% end %>
+</section>

@@ -51,7 +51,6 @@ RSpec.describe FoodEntryManagement::Delete do
 
         expect(result.failure).to eq("food_entry must be FoodEntry")
       end
-
     end
   end
 end

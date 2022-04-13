@@ -1,6 +1,8 @@
 module FoodEntryManagement
   class Create
     include Dry::Monads[:result, :do]
+
+    # params {name: string, meal?: Meal, calories: integer, eaten_at: DateTime}
     def self.call(params)
       new(params).call
     end

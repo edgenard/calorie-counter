@@ -1,6 +1,11 @@
 module FoodEntryManagement
   class Update
     include Dry::Monads[:result, :do]
+
+    # params {
+    # user: User, food_entry: FoodEntry,
+    # changes: {name: string, meal?: Meal, calories: integer, eaten_at: DateTime}
+    # }
     def self.call(params)
       new(params).call
     end

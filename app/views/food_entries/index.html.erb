@@ -1,0 +1,11 @@
+<div class="container">
+  <% @food_entries.each do |food_entry| %>
+    <section class= "section">
+      <p>Name: <%= food_entry.name %></p>
+      <p>Calories: <%= food_entry.calories %> </p>
+      <p>Eaten at: <%= food_entry.eaten_at.to_s(:long) %></p>
+      <p>Meal: <%= food_entry.meal.name %></p>
+    </section>
+
+  <% end %>
+</div>

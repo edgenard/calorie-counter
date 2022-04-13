@@ -55,6 +55,7 @@ group :development, :test do
   gem "standardrb"
   gem "shoulda-matchers", "~> 5.0"
   gem "capybara"
+  gem "launchy"
   gem "rspec-rails"
   gem "factory_bot_rails"
 end
