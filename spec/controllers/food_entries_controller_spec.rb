@@ -127,7 +127,7 @@ RSpec.describe FoodEntriesController, type: :controller do
 
       delete :destroy, params: request_params, session: {token: user_token }
 
-      expect(FoodEntryManagement::Create).to have_received(:call).with(transformed_params)
+      expect(FoodEntryManagement::Delete).to have_received(:call).with(transformed_params)
     end
   end
 end
