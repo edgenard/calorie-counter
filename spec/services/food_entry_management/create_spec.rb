@@ -31,17 +31,18 @@ RSpec.describe FoodEntryManagement::Create do
     context "when parameters are invalid" do
       let(:params) do
         {
+          user: user,
           meal: meal,
           name: "steak",
           calories: 1000,
-          eaten_at: "2022-04-10 21:37:38"
+          eaten_at: nil,
         }
       end
 
       it "returns a failure result with error message" do
         result = described_class.call(params)
 
-        expect(result.failure).to eq("user is missing")
+        expect(result.failure).to eq("eaten_at must be a date time")
       end
     end
 

@@ -41,8 +41,8 @@ module FoodEntryManagement
       required(:eaten_at).value(:date_time)
     end
 
-    rule(:meal) do
-      if key? && values[:user]
+    rule(:meal, :user, :eaten_at) do
+      if key?
         eaten_at_date = values[:eaten_at].to_date
         user = values[:user]
         meal = value
