@@ -81,7 +81,7 @@ RSpec.describe FoodEntriesController, type: :controller do
             meal: user.meals.first.id.to_s
           },
         user_id: user.id.to_s,
-        id: food_entry.id.to_s,
+        id: food_entry.id.to_s
       }
     end
     let(:transformed_params) do
@@ -100,7 +100,7 @@ RSpec.describe FoodEntriesController, type: :controller do
     it "transforms parameters to match service object contract" do
       allow(FoodEntryManagement::Update).to receive(:call).and_return(result_double)
 
-      put :update, params: request_params, session: { token: user_token }
+      put :update, params: request_params, session: {token: user_token}
 
       expect(FoodEntryManagement::Update).to have_received(:call).with(transformed_params)
     end
@@ -125,7 +125,7 @@ RSpec.describe FoodEntriesController, type: :controller do
     it "transforms parameters to match service object contract" do
       allow(FoodEntryManagement::Delete).to receive(:call).and_return(result_double)
 
-      delete :destroy, params: request_params, session: {token: user_token }
+      delete :destroy, params: request_params, session: {token: user_token}
 
       expect(FoodEntryManagement::Delete).to have_received(:call).with(transformed_params)
     end

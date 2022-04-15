@@ -1,5 +1,5 @@
 class FoodEntriesController < ApplicationController
-  before_action :ensure_logged_in
+  before_action :ensure_logged_in, :authorize_user
 
   def new
     @food_entry = FoodEntry.new
@@ -30,6 +30,7 @@ class FoodEntriesController < ApplicationController
   def update
     result = FoodEntryManagement::Update.call(update_food_entry_params)
     if result.success?
+      flash[:success] = "Successfuly updated entry!"
       redirect_to user_food_entries_path(current_user)
     else
       @food_entry = FoodEntry.find(params[:id])
@@ -53,6 +54,11 @@ class FoodEntriesController < ApplicationController
 
   def ensure_logged_in
     redirect_to new_sessions_path unless logged_in?
+  end
+
+  def authorize_user
+    user = User.find(params[:user_id])
+    redirect_to user_food_entries_path(current_user) unless user == current_user
   end
 
   def user_meals

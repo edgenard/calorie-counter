@@ -35,7 +35,7 @@ RSpec.describe FoodEntryManagement::Create do
           meal: meal,
           name: "steak",
           calories: 1000,
-          eaten_at: nil,
+          eaten_at: nil
         }
       end
 
