@@ -89,7 +89,7 @@ RSpec.describe FoodEntryManagement::Update do
         result = described_class.call(params)
 
         expect(result.failure).to eq(
-          "Maximum food entries reached for #{other_meal.name} on #{food_entry[:eaten_at].to_date}"
+          "Maximum food entries reached for #{other_meal.name} on #{food_entry.eaten_at.to_date}"
         )
       end
     end

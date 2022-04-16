@@ -70,9 +70,4 @@ RSpec.configure do |config|
 
   # Include FactoryBot Syntax
   config.include FactoryBot::Syntax::Methods
-
-  # Load seed data
-  config.before(:suite) do
-    Rails.application.load_seed
-  end
 end

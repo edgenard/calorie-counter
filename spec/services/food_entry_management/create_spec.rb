@@ -18,13 +18,13 @@ RSpec.describe FoodEntryManagement::Create do
       it "saves a new food entry record" do
         described_class.call(params)
 
-        expect(FoodEntry.find_by(params)).not_to be_nil
+        expect(FoodEntry.find_by_params(params)).not_to be_nil
       end
 
       it "returns a success result with food entry record" do
         result = described_class.call(params)
 
-        expect(result.success).to eq(FoodEntry.find_by(params))
+        expect(result.success).to eq(FoodEntry.find_by_params(params))
       end
     end
 

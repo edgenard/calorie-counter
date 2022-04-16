@@ -10,8 +10,8 @@ RSpec.feature "Logins", type: :feature do
 
       click_button "Login"
     end
-    expect(page).to have_content "Your Food Entries"
-    expect(page).to have_current_path(user_path(user))
+    expect(page).to have_content "Food Entries"
+    expect(page).to have_current_path(user_food_entries_path(user))
   end
 
   scenario "Unsuccessful Login" do
@@ -50,8 +50,8 @@ RSpec.feature "Logins", type: :feature do
       click_button "Login"
     end
 
-    expect(page).to have_content "Your Food Entries"
-    expect(page).to have_current_path(user_path(user))
+    expect(page).to have_content "Food Entries"
+    expect(page).to have_current_path(user_food_entries_path(user))
 
     click_on "Log out"
 

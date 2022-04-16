@@ -11,9 +11,9 @@ RSpec.feature "SignUps", type: :feature do
     end
 
     user = User.find_by(email: "test_user@example.com")
-    expect(page).to have_content "Your Food Entries"
+    expect(page).to have_content "Food Entries"
     expect(page).to have_content "Log out"
-    expect(page).to have_current_path(user_path(user))
+    expect(page).to have_current_path(user_food_entries_path(user))
   end
 
   scenario "unsuccessful sign up" do
